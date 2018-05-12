@@ -27,21 +27,21 @@ app.get('/balance', function (req, res, next) {
 app.post('/transfer', function (req, res, next) {
    var amount = parseInt(req.body.amount);
    var user = req.body.user;
-
+   
    if (!user) {
       // Pretend there's real user validation here
-      return res.status(400).send('Invalid user');
+      res.status(400).redirect('/');
    }
-   if (isNaN(amount)) {
-      return res.status(400).send('Invalid amount');
+   if (isNaN(amount) || amount <= 0) {
+      res.status(400).redirect('/');
    }
    
    if (amount > accountBalance) {
-      return res.status(400).send('Insufficient funds');
+      res.status(400).redirect('/');
    }
 
    accountBalance -= amount;
-   return res.send('Balance updated');
+   res.redirect('/');
 });
 
 app.listen(process.env.PORT || 3001);
