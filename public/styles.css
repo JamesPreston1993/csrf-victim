@@ -12,7 +12,7 @@ div, form {
    width: 300px;
 }
 
-div h1, div h2 {   
+form h1, div h1, div h2 {   
    margin: 10px 0;
    text-align: center;
    width: 100%;
