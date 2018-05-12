@@ -4,10 +4,9 @@
    padding: 0;
 }
 
-div {
+div, form {
    border: 1px solid black;
    border-radius: 3px;
-   height: 100px;
    margin: 50px auto;
    position: relative;
    width: 300px;
@@ -17,4 +16,21 @@ div h1, div h2 {
    margin: 10px 0;
    text-align: center;
    width: 100%;
+}
+
+form button, form input, form label {
+   display: block;
+   padding: 2px;
+   margin: 0 auto;
+   width: 70%;
+}
+
+form button, form input {
+   margin-bottom: 10px;
+}
+
+form button {
+   padding: 5px;
+   margin: 10px auto;
+   width: 50%;
 }
