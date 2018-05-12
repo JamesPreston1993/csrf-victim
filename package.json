@@ -1,0 +1,27 @@
+{
+  "name": "csrf-attacker",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "start": "node_modules/.bin/nodemon server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JamesPreston1993/csrf-attacker.git"
+  },
+  "author": "James Preston",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JamesPreston1993/csrf-attacker/issues"
+  },
+  "homepage": "https://github.com/JamesPreston1993/csrf-attacker#readme",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "express": "^4.16.3"
+  },
+  "devDependencies": {
+    "nodemon": "^1.17.4"
+  }
+}
