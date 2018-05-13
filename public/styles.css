@@ -34,3 +34,9 @@ form button {
    margin: 10px auto;
    width: 50%;
 }
+
+div a {
+   display: block;
+   margin: 10px auto;
+   text-align: center; 
+}
