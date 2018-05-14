@@ -84,6 +84,30 @@ app.get('/balance', isAuthenticated, function (req, res, next) {
    res.send({ balance: accountBalance });
 });
 
+app.get('/transfer', isAuthenticated, function (req, res, next) {
+   res.send(`
+      <html>
+         <head>
+            <link rel="stylesheet" href="styles.css" />
+            <script src="jquery-3.3.1.min.js"></script>
+         </head>
+         <body>
+            <form action="/transfer" method="POST">
+               <h1>Transfer</h1>
+               <label for="user">User:</label>
+               <input type="text" name="user"/>
+               <label for="amount">Amount (€):</label>
+               <input type="text" name="amount"/>
+               <button type="submit">Transfer Funds</button>
+            </form>
+            <div>
+               <a href="/">Balance</a>
+               <a href="/logout">Logout</a>
+            </div>
+         </body>
+      </html>`);
+})
+
 app.post('/transfer', isAuthenticated, function (req, res, next) {
    var amount = parseInt(req.body.amount);
    var user = req.body.user;
