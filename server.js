@@ -9,7 +9,6 @@ var session = require('express-session');
 const USER = 'admin';
 const PASSWORD = 'password1';
 var accountBalance = 1000;
-var authenticated = false;
 var app = express();
 
 app.use(bodyParser.json());
@@ -21,6 +20,13 @@ app.use(session({
    saveUninitialized: true,
    cookie: { maxAge: 300000, sameSite: false }
 }));
+app.use(function (req, res, next) {
+   res.header('Access-Control-Allow-Origin', '*');
+   res.header('Access-Control-Allow-Credentials', true);
+   res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+   res.header('Access-Control-Allow-Headers', 'X-Requested-With, X-HTTP-Method-Override, Content-Type, Accept');
+   next();
+});
 
 // Auth
 app.use(passport.initialize());
@@ -44,18 +50,10 @@ passport.deserializeUser(function (user, done) {
 });
 
 function isAuthenticated(req, res, next) {
-   if (authenticated)
+   if (req.isAuthenticated())
       return next();
    return res.redirect('/login');
 }
-
-app.use(function (req, res, next) {
-   res.header('Access-Control-Allow-Origin', '*');
-   res.header('Access-Control-Allow-Credentials', false);
-   res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
-   res.header('Access-Control-Allow-Headers', 'X-Requested-With, X-HTTP-Method-Override, Content-Type, Accept');
-   next();
-});
 
 app.get('/', isAuthenticated, function (req, res, next) {
    res.sendFile(__dirname + '/index.html');
@@ -72,14 +70,12 @@ app.post('/login', function (req, res, next) {
       }
 
       req.logIn(user, function () {
-         authenticated = true;
          return res.redirect('/');
       });
    })(req, res, next);
 });
 
 app.get('/logout', isAuthenticated, function (req, res, next) {
-   authenticated = false;
    req.logout();
    res.redirect('/login');
 });
