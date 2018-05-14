@@ -1,6 +1,6 @@
 CSRF Victim Page
 ================
-This is a web page that will send a attack as a victim to
+This is a web page that will act as a victim to
 a CSRF attack.
 
 How to use
